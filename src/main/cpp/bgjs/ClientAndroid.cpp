@@ -144,35 +144,6 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 		}
 	}
 
-	clazz = env->FindClass("ag/boersego/android/conn/BGJSWebPushHelper");
-	if (clazz == NULL) {
-		LOGE("Cannot find class BGJSWebPushHelper!");
-		env->ExceptionClear();
-	} else {
-		_client->bgjsWebPushHelper = (jclass)env->NewGlobalRef(clazz);
-		jmethodID pushMethod = env->GetStaticMethodID(clazz,
-													  "registerPush", "(Ljava/lang/String;JJJJ)Lag/boersego/android/conn/BGJSWebPushHelper$JSWebPushSubscription;");
-		if (pushMethod) {
-			_client->bgjsWebPushSubscribeMethod = pushMethod;
-		} else {
-			LOGE("Cannot find static method BGJSWebPushHelper.registerPush!");
-		}
-	}
-
-    clazz = env->FindClass("ag/boersego/android/conn/BGJSWebPushHelper$JSWebPushSubscription");
-    if (clazz == NULL) {
-        LOGE("Cannot find class BGJSWebPushHelper$JSWebPushSubscription!");
-        env->ExceptionClear();
-    } else {
-        jmethodID unsubscribeMethod = env->GetMethodID(clazz,
-                                                      "unbind", "()Z");
-        if (unsubscribeMethod) {
-            _client->bgjsWebPushSubUnsubscribeMethod = unsubscribeMethod;
-        } else {
-            LOGE("Cannot find static method BGJSWebPushHelper$JSWebPushSubscription.unbind!");
-        }
-    }
-
 	clazz = env->FindClass("ag/boersego/chartingjs/ChartingV8Engine");
 
 	if (clazz == NULL) {
@@ -181,6 +152,31 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 	} else {
 		_client->chartingV8Engine = (jclass)env->NewGlobalRef(clazz);
 		_client->v8EnginegetIAPState = env->GetStaticMethodID(clazz, "getIAPState", "(Ljava/lang/String;)Z");
+
+		_client->bgjsWebPushHelper = (jclass)env->NewGlobalRef(clazz);
+		jmethodID pushMethod = env->GetStaticMethodID(clazz,
+													  "registerPush", "(Ljava/lang/String;JJJJ)Lag/boersego/chartingjs/ChartingV8Engine$JSWebPushSubscription;");
+		if (pushMethod) {
+			_client->bgjsWebPushSubscribeMethod = pushMethod;
+		} else {
+			LOGE("Cannot find static method ChartingV8Engine.registerPush!");
+		}
+	}
+
+
+
+	clazz = env->FindClass("ag/boersego/chartingjs/ChartingV8Engine$JSWebPushSubscription");
+	if (clazz == NULL) {
+		LOGE("Cannot find class ChartingV8Engine$JSWebPushSubscription!");
+		env->ExceptionClear();
+	} else {
+		jmethodID unsubscribeMethod = env->GetMethodID(clazz,
+													   "unbind", "()Z");
+		if (unsubscribeMethod) {
+			_client->bgjsWebPushSubUnsubscribeMethod = unsubscribeMethod;
+		} else {
+			LOGE("Cannot find static method ChartingV8Engine$JSWebPushSubscription.unbind!");
+		}
 	}
 
 
