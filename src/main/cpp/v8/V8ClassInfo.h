@@ -92,7 +92,7 @@ enum class JNIV8ObjectType {
 
 enum class JNIV8ClassCreationPolicy {
     DEFAULT = 0,
-    NATIVE_ONLY = 1
+    JAVA_ONLY = 1
 };
 
 struct V8ClassInfo {

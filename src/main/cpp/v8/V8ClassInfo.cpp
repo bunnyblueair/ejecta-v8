@@ -225,7 +225,7 @@ V8ClassInfo::~V8ClassInfo() {
 }
 
 void V8ClassInfo::setCreationPolicy(JNIV8ClassCreationPolicy policy) {
-    createFromNativeOnly = policy == JNIV8ClassCreationPolicy::NATIVE_ONLY;
+    createFromNativeOnly = policy == JNIV8ClassCreationPolicy::JAVA_ONLY;
 }
 
 void V8ClassInfo::registerConstructor(JNIV8ObjectConstructorCallback callback) {

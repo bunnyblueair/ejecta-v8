@@ -3,6 +3,8 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+ext.artifactId = 'v8annotations-compiler'
+
 dependencies {
     compile project(':ejecta-v8:v8annotations')
     compile fileTree(dir: 'libs', include: ['*.jar'])
