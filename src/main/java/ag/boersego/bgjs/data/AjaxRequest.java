@@ -289,14 +289,14 @@ public class AjaxRequest implements Runnable {
                         requestBuilder.post(RequestBody.create(MediaType.parse(mOutputType), mData));
                     } else {
                         if (mMethod.equals("POST")) {
-                            requestBuilder.post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), mData));
+                            requestBuilder.post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"), mData));
                         }
                     }
                 } else if (mMethod != null) {
                     if (mMethod.equals("DELETE")) {
                         requestBuilder.delete();
                     } else if (mMethod.equals("POST")) {
-                        requestBuilder.post(RequestBody.create(null, new byte[0]));
+                        requestBuilder.post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"), new byte[0]));
                     }
                 }
             }
